@@ -17,16 +17,23 @@
 <table class="table table-dark">
   <thead>
     <tr>
+      <th scope="col">Société</th>
+      <th scope="col">Nom</th>
       <th scope="col">Prénom</th>
-      <th scope="col">Race</th>
+      <th scope="col">Email</th>
+      <th scope="col">iBAN</th>
+      
     </tr>
   </thead>
   <tbody>
     <tr>
     {% for clients in client %}
-      <td>{{ client.Nom }}</td>
-      <td>{{ client.Prenom }}</td>
-      <td> <a  class="btn btn-danger" href="{{ path('delate_client', {'id':client.id}) }}">Supprimé</a></td>
+      <td>{{ clients.Societe }}</td>
+      <td>{{ clients.Nom }}</td>
+      <td>{{ clients.Prenom }}</td>
+      <td>{{ clients.email }}</td>
+      <td>{{ clients.iBAN }}</td>
+      <td> <a  class="btn btn-danger" href="{{ path('delate_chaton', {'id':clients.id}) }}">Supprimé</a></td>
                         
     </tr>
     <tr>
