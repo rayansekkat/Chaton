@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 use App\Entity\Chaton;
+use App\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Finder\Finder;
@@ -19,18 +20,18 @@ class HomeController extends AbstractController
     {
         //$name = getName();
         $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository(Chaton::class);
-        $chaton = $repository->findAll();
+        $repository = $entityManager->getRepository(Client::class);
+        $client = $repository->findAll();
 
-        $finder = new Finder();
+        //$finder = new Finder();
 
-        $finder->directories()->in('../public/photos');
+        //$finder->directories()->in('../public/photos');
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
            
-            'chaton' => $chaton,
-            "dossiers" => $finder,
+            'client' => $client,
+            //"dossiers" => $finder,
         ]);
     }
 

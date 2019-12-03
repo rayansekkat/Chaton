@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+        {{ form_start(form) }}
+     
+                    {{ form_row(form.Societe) }}
+                    {{ form_row(form.Nom) }}
+                    {{ form_row(form.Prenom) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.iBAN) }}
+           
+ <button  type"submit">Valider</button>
+        {{ form_end(form) }}
+       
+
+{% endblock %}
