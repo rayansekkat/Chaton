@@ -44,6 +44,12 @@ class ClientController extends AbstractController
         ]);
     }
 
+                /**
+     * @Route("/delate/{id}", name="delate_client")
+     * 
+     * @return Response
+     */
+
     public function delateClient(Client $client)
     {
         if (!$client) {
