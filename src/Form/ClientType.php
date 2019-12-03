@@ -6,6 +6,8 @@ use App\Entity\Client;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class ClientType extends AbstractType
 {
@@ -17,6 +19,8 @@ class ClientType extends AbstractType
             ->add('Prenom')
             ->add('email')
             ->add('iBAN')
+            ->add('ajouter', SubmitType::class, ["label"=>"Ajouter"])
+
         ;
     }
 

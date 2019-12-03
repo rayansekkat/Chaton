@@ -18,8 +18,12 @@ class ClientController extends AbstractController
      */
     public function index()
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository(Client::class);
+        $client = $repository->findAll();
         return $this->render('client/index.html.twig', [
             'controller_name' => 'ClientController',
+            'client' => $client,
         ]);
     }
 
@@ -36,7 +40,7 @@ class ClientController extends AbstractController
             $em->persist($client);
             $em->flush();
 
-            return new RedirectResponse('/home');
+            return new RedirectResponse('/client');
         }
 
         return $this->render('home/createClient.html.twig', [
@@ -60,7 +64,48 @@ class ClientController extends AbstractController
         $em->flush();
 
         //return new Response('Chaton supprimé');
-        return new RedirectResponse('/home');
+        return new RedirectResponse('/client');
+    }
+
+ /**
+     * @Route("/categories/modifier/{id}", name="edit_client")
+     */
+    public function modifier($id, Request $request)
+    {
+        $repository=$this->getDoctrine()->getRepository(Client::class);
+        $client=$repository->find($id);
+
+        //creation du formmulaire
+        $formulaire=$this->createForm(ClientType::class, $client);
+
+        $formulaire->handleRequest($request);
+        if($formulaire->isSubmitted() && $formulaire->isValid())
+        {
+            //récupérer l'entity manager (sorte de connexion à la BDD comme new PDO)
+            $em=$this->getDoctrine()->getManager();
+
+            //Je dis au manager que je veux ajouter la categorie dans la BDD
+            $em->persist($client);
+
+            $em->flush();
+
+            return $this->redirectToRoute("client");
+        }
+
+        return $this->render('client/editClient.html.twig', [
+            "formulaire"=>$formulaire->createView(),
+         //   "h1"=>"Modification de la catégorie <i>".$client->GetTitre()."</i>",
+        ]);
+    }
+    /**
+     * @Route("/edit", name="edit")
+     */
+    public function edit()
+    {
+    
+        return $this->render('client/editClient.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
     }
 
 }

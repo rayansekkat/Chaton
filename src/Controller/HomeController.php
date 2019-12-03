@@ -2,14 +2,9 @@
 
 namespace App\Controller;
 use App\Entity\Chaton;
-use App\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Request;
-
+use App\Entity\Client;
 
 class HomeController extends AbstractController
 {
@@ -20,8 +15,8 @@ class HomeController extends AbstractController
     {
         //$name = getName();
         $entityManager = $this->getDoctrine()->getManager();
-        $repository = $entityManager->getRepository(Client::class);
-        $client = $repository->findAll();
+        $repository = $entityManager->getRepository(Chaton::class);
+        $chaton = $repository->findAll();
 
         //$finder = new Finder();
 
@@ -30,7 +25,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
            
-            'client' => $client,
+            'chaton' => $chaton,
             //"dossiers" => $finder,
         ]);
     }
